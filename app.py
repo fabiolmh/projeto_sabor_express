@@ -3,9 +3,9 @@ import os
 #variáveis globais:
 restaurantes = []
 
-
-#funçõesgerais
-
+#=================
+#  funçõesgerais |
+#=================
 #Exibir o nome do programa
 def exibir_nome_do_programa():
     print("""
@@ -19,11 +19,13 @@ def exibir_nome_do_programa():
 
 #Exibir subtítulo e limpando a tela
 def exibir_subtitulo(texto):
-	os.system('clear')
-	exibir_nome_do_programa()
-	print(texto)
-	print(' ')
-
+    os.system('clear')
+    exibir_nome_do_programa()
+    linha = '=' * (len(texto) + 4)
+    print(linha)
+    print(f'| {texto} |')
+    print(linha)
+    print(' ')
 
 #Voltar ao menu principal
 def voltar_ao_menu_principal():
@@ -36,12 +38,14 @@ def opcao_invalida():
     input('Opção inválida.')
     voltar_ao_menu_principal()
 
-#Funções do fluxo do programa
+#===============================
+# Funções do fluxo do programa |
+#===============================
 #Exibir o menu de opções
 def exibir_opcoes():
     print('1. CADASTRAR RESTAURANTE.')
     print('2. LISTAR RESTAURANTES.')
-    print('3. ATIVAR RESTAURANTE.')
+    print('3. ALTERNAR ESTADO DOS RESTAURANTES.')
     print('4. SAIR.')
 
 #Escolher opção
@@ -65,7 +69,7 @@ def escolher_opcao():
 
 #Cadastrar restaurante
 def cadastrar_restaurante():
-    exibir_subtitulo('| CADASTRO DE RESTAURANTES |')
+    exibir_subtitulo('CADASTRO DE RESTAURANTES')
     nome_do_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
     categoria = input('Qual a categoria do restaurante: ')
     ativo = False
@@ -75,17 +79,19 @@ def cadastrar_restaurante():
 
 #Listar restaurantes
 def listar_restaurantes():
-    exibir_subtitulo('|           LISTA DE RESTAURANTES              |')
+    exibir_subtitulo('LISTA DE RESTAURANTES')
+    print(f"{'NOME DO RESTAURANTE'.ljust(43)} | {'CATEGORIA'.ljust(31)} | STATUS")
     for restaurante in restaurantes:
         nome_restaurante = restaurante['nome']
         categoria = restaurante['categoria']
         ativo = 'Ativo' if restaurante['ativo'] else 'Desativado'
-        print(f'- Nome do restaurante: {nome_restaurante} | Categoria: {categoria} | Situação no sistema: {ativo}.\n')
+        print('=' * 150)
+        print(f'- Nome do restaurante: {nome_restaurante.ljust(20)} | Categoria: {categoria.ljust(20)} | Situação no sistema: {ativo}.\n')
     voltar_ao_menu_principal()
 
 #Ativar ou desativar restaurante
 def alterar_estado_do_restaurante():
-    exibir_subtitulo('|       ALTERNAR ESTADO DO RESTAURANTE       |')
+    exibir_subtitulo('ALTERNAR ESTADO DO RESTAURANTE')
     try:
         for i, restaurante in enumerate(restaurantes, start=1):    
             nome_restaurante = restaurante['nome']
